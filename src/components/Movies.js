@@ -10,14 +10,13 @@ export default function Movies() {
         const request = axios.get('https://mock-api.driven.com.br/api/v5/cineflex/movies');
 
         request.then((response) => {
-            console.log(response.data);
             setMovies(response.data);
         })
     }, []);
 
     return (
         <Container>
-            <Par> Selecione o filme </Par>
+            <Command> Selecione o filme </Command>
                 {movies.map((movie) => <Movie key={movie.id} image={movie.posterURL} movieId={movie.id} />)}    
         </Container>
     )
@@ -27,13 +26,13 @@ function Movie({ image, movieId }) {
     return (
         <Link to={`/filme/${movieId}`}>
             <MovieContainer>
-                <Image src={image} />
+                <img src={image} />
             </MovieContainer>
         </Link>
     )
 }
 
-const Container = styled.div`
+const Container = styled.section`
     width: 375px;
     margin: 65px auto;
     display: flex;
@@ -42,10 +41,9 @@ const Container = styled.div`
     align-items: center;
 `;
 
-const Par = styled.p`
+const Command = styled.p`
     width: 100%;
     margin: 36px 0;
-    font-family: 'Roboto', sans-serif;
     font-size: 24px;
     text-align: center;
     color: #293845;
@@ -63,10 +61,10 @@ const MovieContainer = styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-`;
 
-const Image = styled.img`
-    width: 129px;
-    height: 193px;
-    object-fit: cover;
-`
+    img {
+        width: 129px;
+        height: 193px;
+        object-fit: cover;
+    }
+`;
