@@ -15,8 +15,7 @@ export default function Sessions() {
             setMovie({
                 title: response.data.title,
                 poster: response.data.posterURL
-            })
-            console.log(response.data);
+            });
         })
     }, []);
 
@@ -30,14 +29,9 @@ export default function Sessions() {
                     date={session.date}
                     sessionTime={session.showtimes} />)}
             </Container>
-            <Footer>
-                <FooterContent>
-                    <MovieContainer>
-                        <img src={movie.poster} />
-                    </MovieContainer>
-                    <MovieTitle>{movie.title}</MovieTitle>
-                </FooterContent>
-            </Footer>
+            <PageFooter
+            poster={movie.poster}
+            title={movie.title} />
         </>
 
     )
@@ -65,6 +59,19 @@ function SessionTimes({ id, time }) {
     )
 }
 
+function PageFooter({ poster, title }) {
+    return (
+        <Footer>
+            <FooterContent>
+                <MovieContainer>
+                    <img src={poster} />
+                </MovieContainer>
+                <MovieTitle>{title}</MovieTitle>
+            </FooterContent>
+        </Footer>
+    )
+}
+
 const Container = styled.div`
     width: 360px;
     margin: 95px auto 147px auto;
@@ -82,6 +89,7 @@ const Command = styled.p`
 const Date = styled.p`
     font-size: 20px;
     letter-spacing: 0.02cm;
+    color: #293845;
 `;
 
 const SessionList = styled.div`
@@ -102,6 +110,10 @@ const SessionButton = styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
+    $:last-of-type {
+        margin-right: 0;
+    }
 `;
 
 const StyledLink = styled(Link)`
@@ -113,6 +125,7 @@ const Footer = styled.footer`
     height: 117px;
     background-color: #DFE6ED;
     position: fixed;
+    border-top: 1px solid #9EADBA;
     bottom: 0;
     z-index: 1;
 `;
@@ -147,4 +160,5 @@ const MovieContainer = styled.div`
 const MovieTitle = styled.h1`
     margin-left: 10px;
     font-size: 22px;
+    color: #293845;
 `
